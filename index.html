@@ -1,87 +1,156 @@
-/* ========== 全域設定 ========== */
-body {
-    font-family: Montserrat, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    background-color: #f8f8f8;
-}
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>時間線</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Yuji+Boku&display=swap">
+    <style>
+        /* ========== 全域設定 ========== */
+        body {
+            font-family: Montserrat, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            background-color: #f8f8f8;
+        }
 
-/* ========== 時間軸設定 ========== */
-.timeline {
-    position: relative;
-    max-width: 90%; /* 讓時間軸自適應寬度 */
-    margin: auto;
-}
+        /* ========== 時間軸設定 ========== */
+        .timeline {
+            position: relative;
+            max-width: 90%; /* 讓時間軸自適應寬度 */
+            margin: auto;
+            padding: 20px 0;
+        }
 
-/* ========== 中央線 ========== */
-.timeline::after {
-    content: '';
-    position: absolute;
-    width: 4px;
-    background-color: #ddd;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-}
+        /* ========== 中央線 ========== */
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: #ddd;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
 
-/* ========== 事件框架 ========== */
-.container {
-    position: relative;
-    width: 50%;
-    padding: 10px 30px;
-    box-sizing: border-box;
-}
+        /* ========== 事件框架 ========== */
+        .container {
+            position: relative;
+            width: 50%;
+            padding: 10px 30px;
+            box-sizing: border-box;
+        }
 
-.left {
-    left: 0;
-    text-align: right;
-}
+        .left {
+            left: 0;
+            text-align: right;
+        }
 
-.right {
-    left: 50%;
-}
+        .right {
+            left: 50%;
+        }
 
-/* ========== 內容框 ========== */
-.content {
-    padding: 10px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-}
+        /* ========== 內容框 ========== */
+        .content {
+            padding: 10px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+        }
 
-/* ========== 圓點設定 ========== */
-.container::after {
-    content: '';
-    position: absolute;
-    top: 12px;
-    width: 12px;
-    height: 12px;
-    background-color: white;
-    border: 3px solid #555;
-    border-radius: 50%;
-    z-index: 1;
-}
+        /* ========== 圓點設定 ========== */
+        .container::after {
+            content: '';
+            position: absolute;
+            top: 12px;
+            width: 12px;
+            height: 12px;
+            background-color: white;
+            border: 3px solid #555;
+            border-radius: 50%;
+            z-index: 1;
+        }
 
-.left::after {
-    right: -8px;
-}
+        .left::after {
+            right: -8px;
+        }
 
-.right::after {
-    left: -8px;
-}
+        .right::after {
+            left: -8px;
+        }
 
-/* ========== 響應式設計（手機版） ========== */
-@media (max-width: 768px) {
-    .timeline {
-        max-width: 100%; /* 讓時間軸更貼合手機螢幕 */
-    }
+        /* ========== 響應式設計（手機版） ========== */
+        @media (max-width: 768px) {
+            .timeline {
+                max-width: 100%;
+                padding: 0 10px;
+            }
 
-    .timeline::after {
-        left: 20px; /* 移動中央線到左側 */
-    }
+            .timeline::after {
+                left: 20px; /* 移動中央線到左側 */
+            }
 
-    .cont
+            .container {
+                width: 100%; /* 讓每個事件佔滿整行 */
+                padding-left: 40px; /* 避免內容疊在中央線上 */
+                text-align: left;
+            }
+
+            .right {
+                left: 0; /* 讓右側事件也變成全寬 */
+            }
+
+            .container::after {
+                left: 10px; /* 圓點對齊左側中央線 */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="timeline">
+        <div class="container left">
+            <div class="content">
+                <h3><span class="number">2195-03-10</span></h3>
+                <p><span class="text">早見明里出生</span></p>
+                <p><span class="text">■■■■離開觀月城</span></p>
+            </div>
+        </div>
+      
+        <div class="container right">
+            <div class="content">
+                <h3><span class="number">2201</span></h3>
+                <p><span class="text">與般若有見相遇</span></p>
+            </div>
+        </div>
+      
+        <div class="container left">
+            <div class="content">
+                <h3><span class="number">2207</span></h3>
+                <p><span class="text">初中與般若有見同班</span></p>
+            </div>
+        </div>
+      
+        <div class="container right">
+            <div class="content">
+                <h3><span class="number">2210</span></h3>
+                <p><span class="text">與砂糖靜帆相遇</span></p>
+                <p><span class="text">般若有見消失</span></p>
+            </div>
+        </div>
+
+        <div class="container left">
+            <div class="content">
+                <h3><span class="number">2211</span></h3>
+                <p><span class="text">砂糖靜帆消失</span></p>
+            </div>
+        </div>
+
+        <div class="container right">
+            <div class="content">
+                <h3><span class="number">2213</span></h3>
+                <p><span class="text">成為審神者</
