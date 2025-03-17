@@ -1,32 +1,32 @@
+
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>時間線</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Yuji+Boku&display=swap">
     <style>
         /* ========== 全域設定 ========== */
         body {
             font-family: Montserrat, sans-serif;
-            margin: 0;
+            overflow: hidden; /* 防止額外空白 */
+            min-height: auto;
+            margin: 5;
             padding: 0;
             display: flex;
-            justify-content: center;
+            justify-content: center; /* 讓時間軸置中 */
             align-items: flex-start;
-            background-color: #f8f8f8;
         }
 
         /* ========== 時間軸設定 ========== */
         .timeline {
             position: relative;
-            max-width: 800px; /* 調整為適合電腦螢幕的寬度 */
-            width: 100%;
-            margin: auto;
-            padding: 20px 0;
+            max-width: 600px;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
 
-        /* ========== 中央線 ========== */
         .timeline::after {
             content: '';
             position: absolute;
@@ -36,55 +36,44 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
+
         }
 
         /* ========== 事件框架 ========== */
         .container {
-            position: relative;
-            width: 50%;
-            padding: 10px 40px;
-            box-sizing: border-box;
+           position: relative;/*相對定位，讓 .container::after 可以準確定位*/
+    width:50%;/*讓每個 事件佔一半畫面寬度（左或右）*/
+    padding: 0px 30px;/*設定 內邊距，讓內容不會貼到邊界*/
+    box-sizing: border-box;/*確保 width 包含 padding，避免內容超出區塊*/
         }
 
-        .left {
-            left: 0;
-            text-align: right;
-        }
-
-        .right {
-            left: 50%;
-        }
-
-        /* ========== 內容框 ========== */
-        .content {
-            padding: 15px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-            font-size: 18px;
-        }
-
+       .left { left: 0; text-align: right; }/*左側事件-左對齊-文字靠右對齊（讓時間軸對齊內容）*/
+.right { left: 50%; }/*右側事件-將區塊移動到 時間軸右側*/
+  /* ========== 內容框 ========== */
+.content {/*事件的內容框*/
+    padding: .1px 10px;/*內邊距 增加內部空間*/
+    background-color: white;/*設定 白色背景*/
+    position: relative;/*讓 方框邊角變圓潤*/
+    border-radius: 10px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.2);/*加入陰影效果，提升立體感*/
+}
         /* ========== 圓點設定 ========== */
         .container::after {
             content: '';
             position: absolute;
-            top: 15px;
-            width: 14px;
-            height: 14px;
+            top: 12px; /* 讓圓點更靠近框框 */
+            width: 12px;
+            height: 12px;
             background-color: white;
             border: 3px solid #555;
             border-radius: 50%;
             z-index: 1;
         }
 
-        .left::after {
-            right: -10px;
-        }
+        .left::after { right: -8px; }
+        .right::after { left: -8px; }
 
-        .right::after {
-            left: -10px;
-        }
- /* ========== 文字字型設定 ========== */
+        /* ========== 文字字型設定 ========== */
         .number {
             font-family: 'Montserrat', sans-serif; /* 數字用 Montserrat */
             font-weight: 900;
@@ -94,7 +83,19 @@
             font-family: 'Yuji Boku', serif; /* 文字用 Yuji Boku */
         }
 
-        /* ========== 響應式設計（手機版） ========== */
+        /* ========== 行距調整 ========== */
+        h3 {
+            margin-bottom: 3px;
+        }
+
+        p {
+            margin-top: 0;
+        }
+        .timeline {
+    transform: scale(0.8); /* 縮小 70% */
+    transform-origin: top center; /* 讓縮放從中間開始 */
+}
+  /* ========== 響應式設計（手機版） ========== */
         @media (max-width: 768px) {
             .timeline {
                 max-width: 100%;
@@ -118,12 +119,7 @@
             .container::after {
                 left: 10px; /* 圓點對齊左側中央線 */
             }
-            .timeline {
-transform: scale(0.8); /* 縮小 70% */
-transform-origin: top center; /* 讓縮放從中間開始 */
-}
 
-        }
     </style>
 </head>
 
